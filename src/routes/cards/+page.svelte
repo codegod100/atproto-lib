@@ -1,14 +1,15 @@
 <script lang="ts">
     import { type PageData } from "./$types";
-
     let { data }: { data: PageData } = $props();
+    let cards = $state(data.cards);
 </script>
 
 <div class="columns-1 sm:columns-2 md:columns-3 lg:columns-5 gap-4 space-y-4">
-    {#each data.cards as card}
+    {#each cards as card}
         <div
-            class="break-inside-avoid bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow"
+            class="break-inside-avoid bg-gray-900 rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow"
         >
+            <div>{card.value.text}</div>
             {#each card.value.links as link}
                 <a href={link.url} class="text-blue-500 hover:underline"
                     >{link.title}</a
