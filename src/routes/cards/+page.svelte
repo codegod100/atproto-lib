@@ -1,9 +1,11 @@
 <script lang="ts">
     import { type PageData } from "./$types";
+    import Input from "./input.svelte";
     let { data }: { data: PageData } = $props();
     let cards = $state(data.cards);
 </script>
 
+<Input bind:cards meta={data.meta} />
 <div class="columns-1 sm:columns-2 md:columns-3 lg:columns-5 gap-4 space-y-4">
     {#each cards as card}
         <div

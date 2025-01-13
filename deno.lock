@@ -1,9 +1,12 @@
 {
   "version": "4",
   "specifiers": {
+    "jsr:@std/encoding@^1.0.6": "1.0.6",
     "npm:@atcute/client@^2.0.6": "2.0.6",
     "npm:@atcute/oauth-browser-client@^1.0.9": "1.0.9",
+    "npm:@atcute/tid@^1.0.2": "1.0.2",
     "npm:@jsr/std__dotenv@~0.225.3": "0.225.3",
+    "npm:@jsr/std__encoding@*": "1.0.6",
     "npm:@sveltejs/adapter-auto@2": "2.1.1_@sveltejs+kit@1.30.4__svelte@5.17.3___acorn@8.14.0__vite@4.5.5_svelte@5.17.3__acorn@8.14.0_vite@4.5.5",
     "npm:@sveltejs/adapter-static@^2.0.3": "2.0.3_@sveltejs+kit@1.30.4__svelte@5.17.3___acorn@8.14.0__vite@4.5.5_svelte@5.17.3__acorn@8.14.0_vite@4.5.5",
     "npm:@sveltejs/kit@2": "2.15.2_@sveltejs+vite-plugin-svelte@5.0.3__svelte@5.17.3___acorn@8.14.0__vite@6.0.7_svelte@5.17.3__acorn@8.14.0_vite@6.0.7",
@@ -17,7 +20,13 @@
     "npm:tailwindcss@^3.3.2": "3.4.17_postcss@8.4.49",
     "npm:tslib@^2.4.1": "2.8.1",
     "npm:typescript@5": "5.7.3",
+    "npm:vite@4.5.5": "4.5.5",
     "npm:vite@^4.4.2": "4.5.5"
+  },
+  "jsr": {
+    "@std/encoding@1.0.6": {
+      "integrity": "ca87122c196e8831737d9547acf001766618e78cd8c33920776c7f5885546069"
+    }
   },
   "npm": {
     "@alloc/quick-lru@5.2.0": {
@@ -38,6 +47,9 @@
       "dependencies": [
         "@atcute/client"
       ]
+    },
+    "@atcute/tid@1.0.2": {
+      "integrity": "sha512-ahmjroNyeDPJhtuf3+HTJropaH04HmJ8fhntDu73Gpz/RkAF7+nkz6kcP2QTgfvMCgMPAJUdskAAP82GPDTY9w=="
     },
     "@esbuild/aix-ppc64@0.24.2": {
       "integrity": "sha512-thpVCb/rhxE/BnMLQ7GReQLLN8q9qbHmI55F4489/ByVg2aQaQ6kbcLb6FHkocZzQhxc4gx0sCk0tJkKBFzDhA=="
@@ -220,6 +232,9 @@
     },
     "@jsr/std__dotenv@0.225.3": {
       "integrity": "sha512-pw67iXjLJGxjBg2MFHoCMG1vAHZLl1gavwGEXnJZ0pA1SAOL2ZomfukALLEUxxPBL+s0YpfEDTOs3xSbQfzHrg=="
+    },
+    "@jsr/std__encoding@1.0.6": {
+      "integrity": "sha512-P5q1wD6O7RtZ89PaIDsQb+3NeCK2xlDEVhZT+k3gn9RNEep4StH7r50cRPK4bp2E7MU8kKc24sSsaCpj5v4i3Q=="
     },
     "@nodelib/fs.scandir@2.1.5": {
       "integrity": "sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==",
@@ -1421,11 +1436,16 @@
     }
   },
   "workspace": {
+    "dependencies": [
+      "jsr:@std/encoding@^1.0.6"
+    ],
     "packageJson": {
       "dependencies": [
         "npm:@atcute/client@^2.0.6",
         "npm:@atcute/oauth-browser-client@^1.0.9",
+        "npm:@atcute/tid@^1.0.2",
         "npm:@jsr/std__dotenv@~0.225.3",
+        "npm:@jsr/std__encoding@*",
         "npm:@sveltejs/adapter-auto@2",
         "npm:@sveltejs/adapter-static@^2.0.3",
         "npm:@sveltejs/kit@2",

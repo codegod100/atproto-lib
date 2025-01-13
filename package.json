@@ -27,7 +27,9 @@
   "dependencies": {
     "@atcute/client": "^2.0.6",
     "@atcute/oauth-browser-client": "^1.0.9",
+    "@atcute/tid": "^1.0.2",
     "@std/dotenv": "npm:@jsr/std__dotenv@^0.225.3",
+    "@std/encoding": "npm:@jsr/std__encoding",
     "@sveltejs/vite-plugin-svelte": "^5.0.3"
   }
 }

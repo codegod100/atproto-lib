@@ -5,5 +5,9 @@
     "types": ["@atcute/bluesky/lexicons"]
   },
   "unstable": ["sloppy-imports"],
-  "imports": { "$lib": "./src/lib/index.ts" }
+  "imports": {
+    "$lib": "./src/lib/index.ts",
+    "@std/encoding": "jsr:@std/encoding@^1.0.6"
+  },
+  "nodeModulesDir": "auto"
 }
