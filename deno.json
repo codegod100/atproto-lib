@@ -2,11 +2,9 @@
   "compilerOptions": {
     "allowJs": true,
     "checkJs": true,
-    "strict": true
+    "strict": true,
+    "types": ["@atcute/bluesky/lexicons"]
   },
-  "unstable": [
-    "sloppy-imports"
-  ],
-  "imports": {"$lib": "./lib/index.ts"}
-
+  "unstable": ["sloppy-imports"],
+  "imports": { "$lib": "./src/lib/index.ts" }
 }

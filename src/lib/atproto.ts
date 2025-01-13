@@ -1,5 +1,5 @@
 import { load } from "@std/dotenv";
-import { XRPC, CredentialManager } from '@atcute/client';
+import { CredentialManager, XRPC } from "@atcute/client";
 import {
   configureOAuth,
   createAuthorizationUrl,
@@ -22,9 +22,10 @@ export type Metadata = {
 };
 
 export async function metadata() {
-  await load({ export: true })
+  await load({ export: true });
   const publicUrl = Deno.env.get("PUBLIC_URL");
-  const url = publicUrl || `http://127.0.0.1:4321`;
+  const port = Deno.env.get("PORT") || 4321;
+  const url = publicUrl || `http://127.0.0.1:${port}`;
   const enc = encodeURIComponent;
   return {
     client_name: "nandi oauth",
@@ -63,13 +64,46 @@ export async function finalize(params: URLSearchParams, metadata: Metadata) {
   return await finalizeAuthorization(params);
 }
 
-export async function getProfile(handle: string){
-  const manager = new CredentialManager({ service: 'https://bsky.social' });
+export async function getProfile(actor: string) {
+  const manager = new CredentialManager({
+    service: "https://public.api.bsky.app",
+  });
   const rpc = new XRPC({ handler: manager });
-  const { data } = await rpc.get('com.atproto.identity.resolveHandle', {
+  const { data } = await rpc.get("app.bsky.actor.getProfile", {
+    params: {
+      actor,
+    },
+  });
+  return data;
+}
+
+export async function listRecords(repo: string, collection: string) {
+  const manager = new CredentialManager({
+    service: "https://bsky.social",
+  });
+  const rpc = new XRPC({ handler: manager });
+  const { data } = await rpc.get("com.atproto.repo.listRecords", {
+    params: {
+      repo,
+      collection,
+    },
+  });
+  return data;
+}
+
+export async function resolveHandle(handle: string) {
+  const manager = new CredentialManager({
+    service: "https://bsky.social",
+  });
+  const rpc = new XRPC({ handler: manager });
+  const { data } = await rpc.get("com.atproto.identity.resolveHandle", {
     params: {
       handle,
     },
   });
-  return data
+  return data;
+}
+
+export function cdnImage(did: string, link: string) {
+  return `https://cdn.bsky.app/img/feed_thumbnail/plain/${did}/${link}`;
 }
