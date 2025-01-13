@@ -2,13 +2,11 @@
   "compilerOptions": {
     "allowJs": true,
     "checkJs": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
     "strict": true
   },
   "unstable": [
     "sloppy-imports"
-  ]
+  ],
+  "imports": {"$lib": "./lib/index.ts"}
 
 }

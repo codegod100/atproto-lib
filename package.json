@@ -25,6 +25,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@atcute/client": "^2.0.6",
     "@atcute/oauth-browser-client": "^1.0.9",
     "@std/dotenv": "npm:@jsr/std__dotenv@^0.225.3"
   }

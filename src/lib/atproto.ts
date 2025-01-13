@@ -1,7 +1,9 @@
 import { load } from "@std/dotenv";
+import { XRPC, CredentialManager } from '@atcute/client';
 import {
   configureOAuth,
   createAuthorizationUrl,
+  finalizeAuthorization,
   getSession,
   resolveFromIdentity,
 } from "@atcute/oauth-browser-client";
@@ -54,4 +56,20 @@ export async function authorizationUrl(handle: string, metadata: Metadata) {
     identity: res.identity,
     scope: "atproto transition:generic",
   });
+}
+
+export async function finalize(params: URLSearchParams, metadata: Metadata) {
+  configureOAuth({ metadata });
+  return await finalizeAuthorization(params);
+}
+
+export async function getProfile(handle: string){
+  const manager = new CredentialManager({ service: 'https://bsky.social' });
+  const rpc = new XRPC({ handler: manager });
+  const { data } = await rpc.get('com.atproto.identity.resolveHandle', {
+    params: {
+      handle,
+    },
+  });
+  return data
 }
