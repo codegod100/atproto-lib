@@ -11,6 +11,7 @@
     "@atcute/client": "npm:@atcute/client@^2.0.6",
     "@atcute/oauth-browser-client": "npm:@atcute/oauth-browser-client@^1.0.9",
     "@atcute/tid": "npm:@atcute/tid@^1.0.2",
+    "@atproto/api": "npm:@atproto/api@^0.13.27",
     "@std/dotenv": "jsr:@std/dotenv@^0.225.3"
   }
 }

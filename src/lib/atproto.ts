@@ -1,6 +1,7 @@
-import { load } from "@std/dotenv";
 import "@atcute/bluesky/lexicons";
+import { load } from "@std/dotenv";
 import { CredentialManager, XRPC } from "@atcute/client";
+import type { AppBskyActorDefs } from "@atproto/api";
 import {
   configureOAuth,
   createAuthorizationUrl,
@@ -9,7 +10,6 @@ import {
   type Session,
 } from "@atcute/oauth-browser-client";
 import type {
-  AppBskyActorGetProfile,
   ComAtprotoIdentityResolveHandle,
   ComAtprotoRepoListRecords,
 } from "@atcute/client/lexicons";
@@ -78,7 +78,7 @@ export async function finalize(
 
 export async function getProfile(
   actor: string,
-): Promise<unknown> {
+): Promise<AppBskyActorDefs.ProfileViewDetailed> {
   const manager = new CredentialManager({
     service: "https://public.api.bsky.app",
   });
@@ -88,7 +88,7 @@ export async function getProfile(
       actor,
     },
   });
-  return data;
+  return data as AppBskyActorDefs.ProfileViewDetailed;
 }
 
 export async function listRecords(
