@@ -25,6 +25,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@atcute/bluesky": "^1.0.11",
     "@atcute/client": "^2.0.6",
     "@atcute/oauth-browser-client": "^1.0.9",
     "@atcute/tid": "^1.0.2",
