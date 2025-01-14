@@ -89,7 +89,13 @@
         <div>
           <div>
             {#if imageTag}
-              <div class="w-60 mt-10">{@html imageTag}</div>
+                <div class="w-60 mt-10">
+                {#if imageTag.includes("<img")}
+                    {@html imageTag}
+                {:else}
+                    <img src={imageTag} alt="caption"/>
+                {/if}
+                </div>
             {/if}
           </div>
         </div>

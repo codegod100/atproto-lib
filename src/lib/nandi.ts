@@ -1,4 +1,9 @@
-import { cdnImage, listRecords, type Metadata, resolveHandle } from "$lib";
+import {
+  cdnImage,
+  listRecords,
+  type Metadata,
+  resolveHandle,
+} from "./atproto.ts";
 import {
   configureOAuth,
   getSession,
@@ -8,7 +13,7 @@ import {
 import { XRPC } from "@atcute/client";
 import * as TID from "@atcute/tid";
 
-interface Card {
+type Card = {
   image?: string;
   value: {
     image?: {
@@ -24,8 +29,8 @@ interface Card {
       image: string;
     }[];
   };
-}
-export async function getCards(repo: string) {
+};
+export async function getCards(repo: string): Promise<Card[]> {
   const did = await resolveHandle(repo).then((r) => r.did);
   const cards: Card[] = await listRecords(repo, "nandi.schemas.card").then((
     r,
@@ -47,17 +52,21 @@ export async function getCards(repo: string) {
   });
 }
 
-async function UrlPreview(url: string) {
+type Link = { url: string; image: string; title: string; description: string };
+
+async function UrlPreview(url: string): Promise<Link> {
   const resp = await fetch(
     `https://cardyb.bsky.app/v1/extract?url=${url}`,
   ).then((r) => r.json());
   return resp;
 }
 
-async function parseText(text: string) {
+async function parseText(
+  text: string,
+): Promise<Link[]> {
   const parts = text.split(/(https?:\/\/[^\s]+)/g);
 
-  const previews = [];
+  const previews: Link[] = [];
   for (const part of parts) {
     if (part.match(/^https?:\/\//)) {
       previews.push(await UrlPreview(part));

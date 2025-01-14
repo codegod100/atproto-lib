@@ -1,12 +1,18 @@
 import { load } from "@std/dotenv";
+import "@atcute/bluesky/lexicons";
 import { CredentialManager, XRPC } from "@atcute/client";
 import {
   configureOAuth,
   createAuthorizationUrl,
   finalizeAuthorization,
-  getSession,
   resolveFromIdentity,
+  type Session,
 } from "@atcute/oauth-browser-client";
+import type {
+  AppBskyActorGetProfile,
+  ComAtprotoIdentityResolveHandle,
+  ComAtprotoRepoListRecords,
+} from "@atcute/client/lexicons";
 export type Metadata = {
   client_name: string;
   client_id: string;
@@ -21,7 +27,7 @@ export type Metadata = {
   dpop_bound_access_tokens: boolean;
 };
 
-export async function metadata() {
+export async function metadata(): Promise<Metadata> {
   await load({ export: true });
   const publicUrl = Deno.env.get("PUBLIC_URL");
   const port = Deno.env.get("PORT") || 4321;
@@ -49,7 +55,10 @@ export async function metadata() {
   };
 }
 
-export async function authorizationUrl(handle: string, metadata: Metadata) {
+export async function authorizationUrl(
+  handle: string,
+  metadata: Metadata,
+): Promise<URL> {
   configureOAuth({ metadata });
   const res = await resolveFromIdentity(handle);
   return await createAuthorizationUrl({
@@ -59,12 +68,17 @@ export async function authorizationUrl(handle: string, metadata: Metadata) {
   });
 }
 
-export async function finalize(params: URLSearchParams, metadata: Metadata) {
+export async function finalize(
+  params: URLSearchParams,
+  metadata: Metadata,
+): Promise<Session> {
   configureOAuth({ metadata });
   return await finalizeAuthorization(params);
 }
 
-export async function getProfile(actor: string) {
+export async function getProfile(
+  actor: string,
+): Promise<unknown> {
   const manager = new CredentialManager({
     service: "https://public.api.bsky.app",
   });
@@ -77,7 +91,10 @@ export async function getProfile(actor: string) {
   return data;
 }
 
-export async function listRecords(repo: string, collection: string) {
+export async function listRecords(
+  repo: string,
+  collection: string,
+): Promise<ComAtprotoRepoListRecords.Output> {
   const manager = new CredentialManager({
     service: "https://bsky.social",
   });
@@ -91,7 +108,9 @@ export async function listRecords(repo: string, collection: string) {
   return data;
 }
 
-export async function resolveHandle(handle: string) {
+export async function resolveHandle(
+  handle: string,
+): Promise<ComAtprotoIdentityResolveHandle.Output> {
   const manager = new CredentialManager({
     service: "https://bsky.social",
   });
@@ -104,6 +123,6 @@ export async function resolveHandle(handle: string) {
   return data;
 }
 
-export function cdnImage(did: string, link: string) {
+export function cdnImage(did: string, link: string): string {
   return `https://cdn.bsky.app/img/feed_thumbnail/plain/${did}/${link}`;
 }

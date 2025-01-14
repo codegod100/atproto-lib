@@ -12,13 +12,15 @@
             class="break-inside-avoid bg-gray-900 rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow"
         >
             <div>{card.value.text}</div>
-            {#each card.value.links as link}
-                <a href={link.url} class="text-blue-500 hover:underline"
-                    >{link.title}</a
-                >
-                {link.description}
-                <img src={link.image} />
-            {/each}
+            {#if card.value.links}
+                {#each card.value.links as link}
+                    <a href={link.url} class="text-blue-500 hover:underline"
+                        >{link.title}</a
+                    >
+                    {link.description}
+                    <img src={link.image} alt="caption" />
+                {/each}
+            {/if}
             <img src={card.image} alt="card" />
         </div>
     {/each}
