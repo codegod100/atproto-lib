@@ -6,7 +6,7 @@
 </script>
 
 <Input bind:cards meta={data.meta} />
-<div class="columns-1 sm:columns-2 md:columns-3 lg:columns-5 gap-4 space-y-4">
+<div class="columns-1  sm:columns-2 md:columns-3 lg:columns-2xs gap-4 space-y-4">
     {#each cards as card}
         <div
             class="break-inside-avoid bg-gray-900 rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow"
